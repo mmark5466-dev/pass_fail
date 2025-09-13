@@ -108,7 +108,7 @@ exe = EXE(pyz, a.scripts, [], exclude_binaries=True, name='PASS-FAIL-Hash-Verifi
 
 coll = COLLECT(exe, a.binaries, a.datas, strip=False, upx=True, upx_exclude=[], name='PASS-FAIL-Hash-Verifier')
 
-app = BUNDLE(coll, name='PASS-FAIL-Hash-Verifier.app', icon='app_icon.icns',
+app = BUNDLE(coll, name='PASS-FAIL-Hash-Verifier.app', icon='icons/app_icon.icns',
              bundle_identifier='com.yourname.pass-fail-hash-verifier',
              info_plist={'NSPrincipalClass': 'NSApplication', 'NSAppleScriptEnabled': False, 'NSHighResolutionCapable': 'True'})
 '''

@@ -22,6 +22,10 @@ import sys
 import tkinter as tk
 from tkinter import messagebox
 from tkinterdnd2 import TkinterDnD
+
+# Add the src directory to the path so imports work correctly
+sys.path.insert(0, os.path.dirname(__file__))
+
 from gui import HashVerifierGUI
 
 # Special code to make the app look better on Windows high-DPI screens
@@ -67,7 +71,7 @@ def setup_main_window():
     
     # Try to set an icon for the window (optional)
     try:
-        icon_path = "src/images/image01.png"
+        icon_path = os.path.join(os.path.dirname(__file__), "images", "image01.png")
         if os.path.exists(icon_path):
             root.iconphoto(True, tk.PhotoImage(file=icon_path))
     except Exception:

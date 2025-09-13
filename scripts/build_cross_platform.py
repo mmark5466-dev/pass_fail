@@ -86,7 +86,7 @@ exe = EXE(pyz, a.scripts, [], exclude_binaries=True, name='PASS-FAIL-Hash-Verifi
 
 coll = COLLECT(exe, a.binaries, a.datas, strip=False, upx=True, upx_exclude=[], name='PASS-FAIL-Hash-Verifier')
 
-app = BUNDLE(coll, name='PASS-FAIL-Hash-Verifier.app', icon='app_icon.icns',
+app = BUNDLE(coll, name='PASS-FAIL-Hash-Verifier.app', icon='icons/app_icon.icns',
              bundle_identifier='com.hashverifier.pass-fail-hash-verifier',
              info_plist={
                 'NSPrincipalClass': 'NSApplication', 
@@ -146,7 +146,7 @@ exe = EXE(pyz, a.scripts, a.binaries, a.datas, [], name='PASS-FAIL-Hash-Verifier
           debug=False, bootloader_ignore_signals=False, strip=False, upx=True,
           runtime_tmpdir=None, console=False, disable_windowed_traceback=False,
           argv_emulation=False, target_arch=None, codesign_identity=None,
-          entitlements_file=None, icon='app_icon.ico')
+          entitlements_file=None, icon='icons/app_icon.ico')
 '''
     
     with open("PASS-FAIL-Hash-Verifier-Windows.spec", "w") as f:
@@ -209,8 +209,8 @@ def build_macos():
     """Build macOS application"""
     print("🍎 Building macOS Application...")
     
-    if not os.path.exists("app_icon.icns"):
-        print("❌ Error: app_icon.icns not found. Run create_cross_platform_icons.py first.")
+    if not os.path.exists("icons/app_icon.icns"):
+        print("❌ Error: icons/app_icon.icns not found. Run scripts/create_cross_platform_icons.py first.")
         return False
     
     spec_file = create_macos_spec()
@@ -241,8 +241,8 @@ def build_windows():
     """Build Windows executable"""
     print("🪟 Building Windows Executable...")
     
-    if not os.path.exists("app_icon.ico"):
-        print("❌ Error: app_icon.ico not found. Run create_cross_platform_icons.py first.")
+    if not os.path.exists("icons/app_icon.ico"):
+        print("❌ Error: icons/app_icon.ico not found. Run scripts/create_cross_platform_icons.py first.")
         return False
     
     spec_file = create_windows_spec()
@@ -282,7 +282,7 @@ def build_linux():
             size_mb = file_size / (1024 * 1024)
             print("✅ Linux build completed successfully!")
             print(f"📂 Output: dist/PASS-FAIL-Hash-Verifier ({size_mb:.1f} MB)")
-            print(f"📁 Icons available in: linux_icons/")
+            print(f"📁 Icons available in: icons/linux_icons/")
             return True
         else:
             print("❌ Linux build failed - no output file created")

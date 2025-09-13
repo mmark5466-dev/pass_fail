@@ -6,7 +6,7 @@ This script creates properly sized app icons for macOS, Windows, and Linux
 from any input image (PNG, JPG, etc.).
 
 Usage:
-    python create_cross_platform_icons.py input_image.png
+    python scripts/create_cross_platform_icons.py input_image.png
 
 Features:
 - Creates macOS ICNS with proper rounded corners and standard sizes
@@ -78,7 +78,7 @@ def create_macos_icons(input_image_path):
     print("🍎 Creating macOS ICNS icon...")
     
     # Create iconset directory
-    iconset_dir = "app_icon.iconset"
+    iconset_dir = "icons/app_icon.iconset"
     if os.path.exists(iconset_dir):
         subprocess.run(["rm", "-rf", iconset_dir], check=True)
     os.makedirs(iconset_dir)
@@ -113,10 +113,10 @@ def create_macos_icons(input_image_path):
         try:
             subprocess.run(["iconutil", "-c", "icns", iconset_dir], check=True)
             
-            if os.path.exists("app_icon.icns"):
-                file_size = os.path.getsize("app_icon.icns")
+            if os.path.exists("icons/app_icon.icns"):
+                file_size = os.path.getsize("icons/app_icon.icns")
                 size_kb = file_size / 1024
-                print(f"✅ macOS ICNS created: app_icon.icns ({size_kb:.0f} KB)")
+                print(f"✅ macOS ICNS created: icons/app_icon.icns ({size_kb:.0f} KB)")
                 
                 # Clean up iconset directory
                 subprocess.run(["rm", "-rf", iconset_dir], check=True)
@@ -165,12 +165,12 @@ def create_windows_ico(input_image_path):
                 images.append(img)
             
             # Save as ICO with all sizes
-            images[0].save("app_icon.ico", format="ICO", 
+            images[0].save("icons/app_icon.ico", format="ICO", 
                           sizes=[(img.width, img.height) for img in images])
             
-            file_size = os.path.getsize("app_icon.ico")
+            file_size = os.path.getsize("icons/app_icon.ico")
             size_kb = file_size / 1024
-            print(f"✅ Windows ICO created: app_icon.ico ({size_kb:.0f} KB)")
+            print(f"✅ Windows ICO created: icons/app_icon.ico ({size_kb:.0f} KB)")
             
             # Clean up temporary files
             for temp_file in temp_files:
@@ -201,8 +201,8 @@ def create_linux_icons(input_image_path):
     """
     print("🐧 Creating Linux PNG icons...")
     
-    # Create linux_icons directory
-    linux_dir = "linux_icons"
+    # Create icons/linux_icons directory
+    linux_dir = "icons/linux_icons"
     if os.path.exists(linux_dir):
         subprocess.run(["rm", "-rf", linux_dir], check=True)
     os.makedirs(linux_dir)
@@ -230,7 +230,7 @@ def main():
     if len(sys.argv) != 2:
         print("🎨 Cross-Platform App Icon Creator")
         print("=" * 40)
-        print("Usage: python create_cross_platform_icons.py <input_image>")
+        print("Usage: python scripts/create_cross_platform_icons.py <input_image>")
         print("")
         print("This script creates app icons for:")
         print("  🍎 macOS: .icns with rounded corners (optimized size)")
@@ -238,7 +238,7 @@ def main():
         print("  🐧 Linux: .png files in standard sizes")
         print("")
         print("Example:")
-        print("  python create_cross_platform_icons.py src/images/image02.png")
+        print("  python scripts/create_cross_platform_icons.py src/images/image02.png")
         return
     
     input_image = sys.argv[1]
@@ -252,6 +252,9 @@ def main():
     print(f"📸 Source image: {input_image}")
     print(f"💻 Running on: {sys_platform.system()}")
     print()
+    
+    # Ensure icons directory exists
+    os.makedirs("icons", exist_ok=True)
     
     # Check if PIL is available
     try:
@@ -280,7 +283,7 @@ def main():
         print("🎉 All platform icons created successfully!")
         print()
         print("📁 Generated files:")
-        print("  🍎 app_icon.icns - macOS (smaller, properly sized)")
+        print("  🍎 icons/app_icon.icns - macOS (smaller, properly sized)")
         print("  🪟 app_icon.ico - Windows")  
         print("  🐧 linux_icons/ - Linux PNG files")
         print()

@@ -1,4 +1,22 @@
-# PASS // FAIL - Hash Verification Tool
+# PASS // FAIL - ## 📥 Download & Install
+
+### 🚀 **Ready-to-Use Applications** (Recommended)
+
+**👉 [Go to Releases Page](../../releases/latest) 👈**
+
+Download pre-built applications for your platform:
+
+- **🍎 macOS** (Intel & Apple Silicon): `PASS-FAIL-Hash-Verifier-macOS-v1.0.0.zip` (67MB)
+  - Download → Extract → Double-click the `.app` file
+  - *If security warning appears, right-click app and select "Open"*
+
+- **🐧 Linux** (x86_64): `PASS-FAIL-Hash-Verifier-Linux-v1.0.0.tar.gz` (22MB)  
+  - Download → Extract → Make executable → Run
+  - `tar -xzf filename.tar.gz && chmod +x PASS-FAIL-Hash-Verifier && ./PASS-FAIL-Hash-Verifier`
+
+- **🪟 Windows**: *Coming soon in next release*
+
+**✨ No installation required - just download and run!**ication Tool
 
 🎨 **Beautiful hash verification tool with animated progress display**
 

@@ -1,0 +1,11 @@
+# Dependencies for PASS // FAIL Hash Verifier
+# This file lists the Python packages needed to run the application
+
+# For high-quality image display and resizing
+Pillow>=10.0.0
+
+# Note: tkinter is included with most Python installations
+# If you get "No module named tkinter" errors, you may need to:
+# - On Ubuntu/Debian: sudo apt-get install python3-tk
+# - On macOS: Install Python from python.org (includes tkinter)
+# - On Windows: tkinter is usually included by default

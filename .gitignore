@@ -2,7 +2,6 @@
 build/
 dist/
 releases/
-specs/
 
 # Python cache
 __pycache__/
@@ -47,6 +46,8 @@ MANIFEST
 
 # PyInstaller
 *.manifest
+# Temporary spec files in root (organized ones are in specs/ folder)
+*.spec
 
 # Test files
 test_*.txt

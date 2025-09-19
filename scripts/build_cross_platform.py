@@ -43,21 +43,170 @@ def clean_previous_builds():
     
     print("✅ Cleanup completed!")
 
-def use_spec_file(platform):
-    """Copy spec file from specs/ folder to root for PyInstaller to use"""
-    spec_filename = f"PASS-FAIL-Hash-Verifier-{platform}.spec"
-    source_path = f"specs/{spec_filename}"
-    target_path = spec_filename
+def create_macos_spec():
+    """Create PyInstaller spec file optimized for macOS"""
+    spec_content = '''# -*- mode: python ; coding: utf-8 -*-
+
+from PyInstaller.utils.hooks import collect_all
+
+# Collect all data and imports
+datas = []
+binaries = []
+hiddenimports = []
+
+# PIL/Pillow support
+tmp_ret = collect_all('PIL')
+datas += tmp_ret[0]
+binaries += tmp_ret[1]
+hiddenimports += tmp_ret[2]
+
+# tkinterdnd2 support
+tmp_ret = collect_all('tkinterdnd2')
+datas += tmp_ret[0] 
+binaries += tmp_ret[1]
+hiddenimports += tmp_ret[2]
+
+# Add explicit hidden imports
+hiddenimports += [
+    'PIL._imaging', 'PIL.Image', 'PIL.ImageTk', 'tkinterdnd2',
+    'tkinter', 'tkinter.messagebox', 'tkinter.filedialog', 'tkinter.ttk',
+    'hashlib', 'threading', 'os', 'sys', 'time', 'math', 'collections', 'platform',
+]
+
+# Add data files
+datas += [('src/images', 'images'), ('src/wordlists', 'wordlists')]
+
+a = Analysis(['src/main.py'], pathex=[], binaries=binaries, datas=datas,
+             hiddenimports=hiddenimports, hookspath=[], hooksconfig={},
+             runtime_hooks=[], excludes=[], noarchive=False, optimize=0)
+
+pyz = PYZ(a.pure, a.zipped_data, cipher=None)
+
+exe = EXE(pyz, a.scripts, [], exclude_binaries=True, name='PASS-FAIL-Hash-Verifier',
+          debug=False, bootloader_ignore_signals=False, strip=False, upx=True,
+          console=False, disable_windowed_traceback=False, argv_emulation=False,
+          target_arch=None, codesign_identity=None, entitlements_file=None)
+
+coll = COLLECT(exe, a.binaries, a.datas, strip=False, upx=True, upx_exclude=[], name='PASS-FAIL-Hash-Verifier')
+
+app = BUNDLE(coll, name='PASS-FAIL-Hash-Verifier.app', icon='icons/app_icon.icns',
+             bundle_identifier='com.hashverifier.pass-fail-hash-verifier',
+             info_plist={
+                'NSPrincipalClass': 'NSApplication', 
+                'NSAppleScriptEnabled': False, 
+                'NSHighResolutionCapable': 'True',
+                'CFBundleDisplayName': 'PASS // FAIL Hash Verifier',
+                'CFBundleVersion': '2.0.0',
+                'CFBundleShortVersionString': '2.0'
+             })
+'''
     
-    if not os.path.exists(source_path):
-        print(f"❌ Error: {source_path} not found")
-        return None
+    with open("PASS-FAIL-Hash-Verifier-macOS.spec", "w") as f:
+        f.write(spec_content)
     
-    # Copy spec file to root temporarily
-    shutil.copy2(source_path, target_path)
-    print(f"📋 Using spec file: {source_path}")
+    return "PASS-FAIL-Hash-Verifier-macOS.spec"
+
+def create_windows_spec():
+    """Create PyInstaller spec file optimized for Windows"""
+    spec_content = '''# -*- mode: python ; coding: utf-8 -*-
+
+from PyInstaller.utils.hooks import collect_all
+
+# Collect all data and imports
+datas = []
+binaries = []
+hiddenimports = []
+
+# PIL/Pillow support
+tmp_ret = collect_all('PIL')
+datas += tmp_ret[0]
+binaries += tmp_ret[1]
+hiddenimports += tmp_ret[2]
+
+# tkinterdnd2 support
+tmp_ret = collect_all('tkinterdnd2')
+datas += tmp_ret[0] 
+binaries += tmp_ret[1]
+hiddenimports += tmp_ret[2]
+
+# Add explicit hidden imports
+hiddenimports += [
+    'PIL._imaging', 'PIL.Image', 'PIL.ImageTk', 'tkinterdnd2',
+    'tkinter', 'tkinter.messagebox', 'tkinter.filedialog', 'tkinter.ttk',
+    'hashlib', 'threading', 'os', 'sys', 'time', 'math', 'collections', 'platform',
+]
+
+# Add data files
+datas += [('src/images', 'images'), ('src/wordlists', 'wordlists')]
+
+a = Analysis(['src/main.py'], pathex=[], binaries=binaries, datas=datas,
+             hiddenimports=hiddenimports, hookspath=[], hooksconfig={},
+             runtime_hooks=[], excludes=[], noarchive=False, optimize=0)
+
+pyz = PYZ(a.pure, a.zipped_data, cipher=None)
+
+exe = EXE(pyz, a.scripts, a.binaries, a.datas, [], name='PASS-FAIL-Hash-Verifier',
+          debug=False, bootloader_ignore_signals=False, strip=False, upx=True,
+          runtime_tmpdir=None, console=False, disable_windowed_traceback=False,
+          argv_emulation=False, target_arch=None, codesign_identity=None,
+          entitlements_file=None, icon='icons/app_icon.ico')
+'''
     
-    return target_path
+    with open("PASS-FAIL-Hash-Verifier-Windows.spec", "w") as f:
+        f.write(spec_content)
+    
+    return "PASS-FAIL-Hash-Verifier-Windows.spec"
+
+def create_linux_spec():
+    """Create PyInstaller spec file optimized for Linux"""
+    spec_content = '''# -*- mode: python ; coding: utf-8 -*-
+
+from PyInstaller.utils.hooks import collect_all
+
+# Collect all data and imports
+datas = []
+binaries = []
+hiddenimports = []
+
+# PIL/Pillow support
+tmp_ret = collect_all('PIL')
+datas += tmp_ret[0]
+binaries += tmp_ret[1]
+hiddenimports += tmp_ret[2]
+
+# tkinterdnd2 support
+tmp_ret = collect_all('tkinterdnd2')
+datas += tmp_ret[0] 
+binaries += tmp_ret[1]
+hiddenimports += tmp_ret[2]
+
+# Add explicit hidden imports
+hiddenimports += [
+    'PIL._imaging', 'PIL.Image', 'PIL.ImageTk', 'tkinterdnd2',
+    'tkinter', 'tkinter.messagebox', 'tkinter.filedialog', 'tkinter.ttk',
+    'hashlib', 'threading', 'os', 'sys', 'time', 'math', 'collections', 'platform',
+]
+
+# Add data files
+datas += [('src/images', 'images'), ('src/wordlists', 'wordlists')]
+
+a = Analysis(['src/main.py'], pathex=[], binaries=binaries, datas=datas,
+             hiddenimports=hiddenimports, hookspath=[], hooksconfig={},
+             runtime_hooks=[], excludes=[], noarchive=False, optimize=0)
+
+pyz = PYZ(a.pure, a.zipped_data, cipher=None)
+
+exe = EXE(pyz, a.scripts, a.binaries, a.datas, [], name='PASS-FAIL-Hash-Verifier',
+          debug=False, bootloader_ignore_signals=False, strip=False, upx=True,
+          runtime_tmpdir=None, console=False, disable_windowed_traceback=False,
+          argv_emulation=False, target_arch=None, codesign_identity=None,
+          entitlements_file=None)
+'''
+    
+    with open("PASS-FAIL-Hash-Verifier-Linux.spec", "w") as f:
+        f.write(spec_content)
+    
+    return "PASS-FAIL-Hash-Verifier-Linux.spec"
 
 def cleanup_temp_specs():
     """Remove temporary spec files from root directory"""
@@ -80,9 +229,7 @@ def build_macos():
         print("❌ Error: icons/app_icon.icns not found. Run scripts/create_cross_platform_icons.py first.")
         return False
     
-    spec_file = use_spec_file("macOS")
-    if not spec_file:
-        return False
+    spec_file = create_macos_spec()
     
     try:
         result = subprocess.run([
@@ -118,9 +265,7 @@ def build_windows():
         print("❌ Error: icons/app_icon.ico not found. Run scripts/create_cross_platform_icons.py first.")
         return False
     
-    spec_file = use_spec_file("Windows")
-    if not spec_file:
-        return False
+    spec_file = create_windows_spec()
     
     try:
         result = subprocess.run([
@@ -149,9 +294,7 @@ def build_linux():
     """Build Linux executable"""
     print("🐧 Building Linux Executable...")
     
-    spec_file = use_spec_file("Linux")
-    if not spec_file:
-        return False
+    spec_file = create_linux_spec()
     
     try:
         result = subprocess.run([

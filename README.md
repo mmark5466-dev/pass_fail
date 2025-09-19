@@ -20,11 +20,6 @@ An intuitive, visual GUI application for testing password security through hash 
 
 *Clean, modern interface with drag & drop support and animated progress indicators*
 
-### Hash Verification in Progress
-![Hash Verification Progress](screenshots/verification-progress.png)
-
-*Watch the stick figure animation as your hashes are verified against password dictionaries*
-
 ## 📥 Download & Install
 
 ### 🚀 **Ready-to-Use Applications** (Recommended)

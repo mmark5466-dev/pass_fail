@@ -4,19 +4,13 @@ This directory contains screenshots of the PASS-FAIL Hash Verifier application f
 
 ## Required Screenshots
 
-Please add the following screenshots to this directory:
+Please add the following screenshot to this directory:
 
-### 1. `main-interface.png`
+### `main-interface.png`
 - Screenshot of the main application window
 - Should show the clean purple interface
 - Include the input fields, wordlist panel, and start button
 - Take when the app is in idle state (not running verification)
-
-### 2. `verification-progress.png`
-- Screenshot during hash verification
-- Should show the stick figure animation in progress
-- Include the terminal output panel with active verification
-- Capture when the progress bar is partially filled
 
 ## Screenshot Guidelines
 

@@ -13,6 +13,18 @@ An intuitive, visual GUI application for testing password security through hash 
 - ⌨️ **Keyboard Shortcuts** - Press Enter to start/stop verification
 - 🖥️ **Cross-Platform** - Works on macOS, Windows, and Linux
 
+## 📸 Screenshots
+
+### Main Interface
+![PASS-FAIL Hash Verifier Main Interface](screenshots/main-interface.png)
+
+*Clean, modern interface with drag & drop support and animated progress indicators*
+
+### Hash Verification in Progress
+![Hash Verification Progress](screenshots/verification-progress.png)
+
+*Watch the stick figure animation as your hashes are verified against password dictionaries*
+
 ## 📥 Download & Install
 
 ### 🚀 **Ready-to-Use Applications** (Recommended)

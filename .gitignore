@@ -1,8 +1,13 @@
 # Build outputs
 build/
 dist/
-releases/
 specs/
+
+# Release binaries (but allow documentation)
+releases/*.zip
+releases/*.tar.gz
+releases/*.exe
+releases/*.dmg
 
 # Python cache
 __pycache__/

@@ -3,6 +3,8 @@
 
 Download pre-built applications for macOS and Linux from this folder.
 
+> **📱 macOS Users:** You will see a "damaged app" error when first running the downloaded app. This is normal! Simply run `xattr -c PASS-FAIL-Hash-Verifier.app` in Terminal to fix it. See [macOS Security Guide](MACOS_SECURITY_GUIDE.md) for details.
+
 ## Latest Releases
 
 - **macOS:** `PASS-FAIL-Hash-Verifier-macOS-v1.1.1.zip` (Clean build, no quarantine issues)
@@ -20,6 +22,13 @@ Download pre-built applications for macOS and Linux from this folder.
 
 ## macOS Security Notice
 
-If you encounter "app is damaged" errors on macOS, please refer to our [macOS Security Guide](MACOS_SECURITY_GUIDE.md) for solutions.
+**Expected Behavior:** When you download and try to open the macOS app, you will see a "damaged app" error. This is normal macOS security behavior for unsigned applications.
+
+**Quick Fix:** Run this command in Terminal after downloading:
+```bash
+cd ~/Downloads && xattr -c PASS-FAIL-Hash-Verifier.app
+```
+
+For detailed solutions, see our [macOS Security Guide](MACOS_SECURITY_GUIDE.md).
 
 No installation required. All dependencies are included in the executables.
